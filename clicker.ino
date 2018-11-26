@@ -14,8 +14,13 @@
 
 Adafruit_SSD1306 disp(OLED_DC, OLED_RESET, OLED_CS);
 
-int credit = 0;
-int farm = 0;
+unsigned int credit = 0;
+unsigned int farm = 0;
+
+unsigned int plusClick = 100;
+unsigned int plusFarm = 10;
+
+int costFarm = 1000;
 
 int bStateA = 0;
 int bStateA1 = 0;
@@ -47,7 +52,7 @@ void loop() {
   bStateA = digitalRead(bPinA);
   if(bStateA != bStateA1) {
     if(bStateA == HIGH) {
-      credit ++;
+      credit += plusClick;
     } else {
       
     }
@@ -58,8 +63,8 @@ void loop() {
   bStateB = digitalRead(bPinB);
   if(bStateB != bStateB1) {
     if(bStateB == HIGH) {
-      if(credit >= 10) {
-        credit -= 10;
+      if(credit >= costFarm) {
+        credit -= costFarm;
         farm ++;
       }
     } else {
@@ -85,7 +90,7 @@ void loop() {
   if(cMillis - pMillis >= interval) {
     pMillis = cMillis;
 
-    credit += (farm * 2);
+    credit += (farm * plusFarm);
   }
 
   //refresh screen
