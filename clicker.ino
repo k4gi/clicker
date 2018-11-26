@@ -20,7 +20,7 @@ unsigned int farm = 0;
 unsigned int plusClick = 100;
 unsigned int plusFarm = 10;
 
-int costFarm = 1000;
+unsigned int costFarm = 1000;
 
 int bStateA = 0;
 int bStateA1 = 0;
@@ -52,7 +52,7 @@ void loop() {
   bStateA = digitalRead(bPinA);
   if(bStateA != bStateA1) {
     if(bStateA == HIGH) {
-      credit += plusClick;
+      add_credits(plusClick);
     } else {
       
     }
@@ -77,7 +77,7 @@ void loop() {
   bStateC = digitalRead(bPinC);
   if(bStateC != bStateC1) {
     if(bStateC == HIGH) {
-      
+      add_credits(10000);
     } else {
       
     }
@@ -90,7 +90,7 @@ void loop() {
   if(cMillis - pMillis >= interval) {
     pMillis = cMillis;
 
-    credit += (farm * plusFarm);
+    add_credits(farm * plusFarm);
   }
 
   //refresh screen
@@ -105,4 +105,14 @@ void loop() {
   disp.setCursor(0,24);
   disp.println(farm);
   disp.display();
+}
+
+void add_credits(int in) {
+  if(credit + in >= credit) {
+    credit += in;
+  } else {
+    while(credit + 1 > credit) {
+      credit ++;
+    }
+  }
 }
