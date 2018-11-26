@@ -17,10 +17,10 @@ Adafruit_SSD1306 disp(OLED_DC, OLED_RESET, OLED_CS);
 unsigned int credit = 0;
 unsigned int farm = 0;
 
-unsigned int plusClick = 100;
-unsigned int plusFarm = 10;
+unsigned int plusClick = 10;
+unsigned int plusFarm = 1;
 
-unsigned int costFarm = 1000;
+unsigned int costFarm = 100;
 
 int bStateA = 0;
 int bStateA1 = 0;
