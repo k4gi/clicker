@@ -42,7 +42,7 @@ void setup() {
   disp.setTextSize(2);
   disp.setTextColor(WHITE);
   disp.setCursor(0,20);
-  disp.println("XDRduino");
+  disp.println("Clicker");
   disp.display(); 
   delay(1000);
 }
