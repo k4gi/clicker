@@ -12,6 +12,11 @@
 #define bPinB 2
 #define bPinC 3
 
+//i'm adding LEDs that light up when you press a button, just because i have some now
+#define ledPinA 8
+#define ledPinB 9
+#define ledPinC 10
+
 Adafruit_SSD1306 disp(OLED_DC, OLED_RESET, OLED_CS);
 
 unsigned int credit = 0;
@@ -42,9 +47,22 @@ void setup() {
   disp.setTextSize(2);
   disp.setTextColor(WHITE);
   disp.setCursor(0,20);
-  disp.println("Clicker");
-  disp.display(); 
+  disp.println("Clicker++");
+  disp.display();
+  //setup LEDs
+  pinMode(ledPinA, OUTPUT);
+  pinMode(ledPinB, OUTPUT);
+  pinMode(ledPinC, OUTPUT);
+  digitalWrite(ledPinA, HIGH);
+  digitalWrite(ledPinB, HIGH);
+  digitalWrite(ledPinC, HIGH);
+
   delay(1000);
+
+  //turn off those LEDs!
+  digitalWrite(ledPinA, LOW);
+  digitalWrite(ledPinB, LOW);
+  digitalWrite(ledPinC, LOW);
 }
 
 void loop() {
@@ -52,8 +70,10 @@ void loop() {
   bStateA = digitalRead(bPinA);
   if(bStateA != bStateA1) {
     if(bStateA == HIGH) {
+      digitalWrite(ledPinA, HIGH);
       add_credits(plusClick);
     } else {
+      digitalWrite(ledPinA, LOW);
       
     }
     //delay(10);
@@ -63,11 +83,13 @@ void loop() {
   bStateB = digitalRead(bPinB);
   if(bStateB != bStateB1) {
     if(bStateB == HIGH) {
+      digitalWrite(ledPinB, HIGH);
       if(credit >= costFarm) {
         credit -= costFarm;
         farm ++;
       }
     } else {
+      digitalWrite(ledPinB, LOW);
       
     }
     //delay(10);
@@ -77,8 +99,10 @@ void loop() {
   bStateC = digitalRead(bPinC);
   if(bStateC != bStateC1) {
     if(bStateC == HIGH) {
+      digitalWrite(ledPinC, HIGH);
       add_credits(10000);
     } else {
+      digitalWrite(ledPinC, LOW);
       
     }
     //delay(10);
